@@ -1,15 +1,27 @@
 <template>
   <div id="main-app">
-    <HelloWorld
-      msg="Welcome to Your Vue.js Appoinment App"
-      :appointments="appointments"
-      @delete="removeItem"
-    />
+    <vc-layout class="m-auto">
+      <vc-toolbar color="pink" fixed dark application>
+        <vc-toolbar-icon-left icon="mdi-lastfm" />
+        <vc-toolbar-title>Pet&#9829;Care</vc-toolbar-title>
+      </vc-toolbar>
+
+      <HelloWorld
+        msg="Welcome to Your Vue.js Appoinment App"
+        :appointments="appointments"
+        @delete="removeItem"
+        @edit="editItem"
+      />
+    </vc-layout>
+    <vc-footer color="deep-purple " align="center" :class="title">
+      Made with &#9829;
+    </vc-footer>
   </div>
 </template>
 
 <script>
   import HelloWorld from "./components/HelloWorld.vue";
+
   import _ from "lodash";
   import axios from "axios";
   export default {
@@ -37,6 +49,11 @@
     methods: {
       removeItem(appointment) {
         this.appointments = _.without(this.appointments, appointment);
+      },
+      editItem(id, field, text) {
+        const aptIndex = _.findIndex(this.appointments, { aptId: id });
+        const New_appointments = (this.appointments[aptIndex][field] = text);
+        console.log(typeof New_appointments);
       },
     },
   };

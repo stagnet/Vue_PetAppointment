@@ -1,5 +1,6 @@
 <template>
   <section class="hello">
+    <app-appointment />
     <vc-layout :spacing="20" class="m-auto">
       <vc-col :span="8" sm12 md12 xs24>
         <vc-card class="elevation-4">
@@ -137,6 +138,7 @@
 
 <script>
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+  import AppAppointment from "./AddAppointment";
   import moment from "moment";
   export default {
     name: "HelloWorld",
@@ -157,6 +159,7 @@
     },
     components: {
       FontAwesomeIcon,
+      AppAppointment,
     },
 
     methods: {
