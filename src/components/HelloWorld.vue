@@ -1,10 +1,12 @@
 <template>
   <section class="hello">
     <app-appointment @add="addItem" />
+
     <vc-layout :spacing="20" class="m-auto">
       <vc-col :span="8" sm12 md12 xs24>
         <vc-card class="elevation-4">
           <vc-card-media height="316px" parallax background="/pet_image.png" />
+
           <vc-card-title>
             <h2
               :class="[

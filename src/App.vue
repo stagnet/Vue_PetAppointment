@@ -5,14 +5,18 @@
         <vc-toolbar-icon-left icon="mdi-lastfm" />
         <vc-toolbar-title>Pet&#9829;Care</vc-toolbar-title>
       </vc-toolbar>
-
       <!-- Search bar starts -->
-      <search-apt @searchRecords="searchAppointments" />
+      <search-apt
+        @searchRecords="searchAppointments"
+        :myKey="filterKey"
+        :myOrder="filterOrder"
+        @request-key="changeKey"
+        @request-order="changeOrder"
+      />
       <!-- Search bar ends -->
-
       <HelloWorld
         msg="Welcome to Your Vue.js Appoinment App"
-        :appointments="searchApts"
+        :appointments="filteredApts"
         @delete="removeItem"
         @edit="editItem"
       />
@@ -26,6 +30,7 @@
 <script>
   import HelloWorld from "./components/HelloWorld.vue";
   import SearchApt from "./components/SearchApt.vue";
+
   import _ from "lodash";
   import axios from "axios";
   export default {
@@ -41,6 +46,8 @@
         searchTerms: "",
         //create an index for each element in an array;
         aptIndex: 0,
+        filterKey: "petName",
+        filterOrder: "asc",
       };
     },
 
@@ -69,10 +76,22 @@
           );
         });
       },
+      filteredApts() {
+        return _.orderBy(
+          this.searchApts,
+          (appointment) => {
+            return appointment[this.filterKey].toLowerCase();
+          },
+          this.filterOrder
+        );
+      },
     },
     methods: {
-      searchAppointments(terms) {
-        this.searchTerms = terms;
+      changeKey(value) {
+        this.filterKey = value;
+      },
+      changeOrder(value) {
+        this.filterOrder = value;
       },
       removeItem(appointment) {
         this.appointments = _.without(this.appointments, appointment);
@@ -81,6 +100,9 @@
         const aptIndex = _.findIndex(this.appointments, { aptId: id });
         const New_appointments = (this.appointments[aptIndex][field] = text);
         // console.log(typeof New_appointments);
+      },
+      searchAppointments(terms) {
+        this.searchTerms = terms;
       },
     },
   };
