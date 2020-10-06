@@ -14,7 +14,7 @@
           </vc-toolbar>
           <!-- form start -->
 
-          <form v-if="hidepanel">
+          <form v-if="hidepanel" @submit.prevent="requestAdd">
             <vc-text
               class="mx-16 align-right"
               type="text"
@@ -38,9 +38,18 @@
               type="date"
               label="Date"
               icon-left="pets"
-              name="text-2"
+              name="date-1"
               color="primary"
               v-model="formData.date"
+            />
+            <vc-text
+              class="mx-16 align-right"
+              type="time"
+              label="Time"
+              icon-left="pets"
+              name="time-1"
+              color="primary"
+              v-model="formData.time"
             />
             <vc-text
               class="mx-16 align-right"
@@ -52,7 +61,7 @@
               v-model="formData.notes"
             />
             <div class="ma-8">
-              <vc-button icon-left="check_circle" color="info">
+              <vc-button type="submit" icon-left="check_circle" color="info">
                 Add
               </vc-button>
             </div>
@@ -72,6 +81,19 @@
         formData: [],
         hidepanel: false,
       };
+    },
+    methods: {
+      requestAdd() {
+        this.formData = {
+          petName: this.formData.petName,
+          petOwner: this.formData.ownerName,
+          aptDate: this.formData.date + " " + this.formData.time,
+          aptNotes: this.formData.notes,
+        };
+        this.$emit("add", this.formData);
+        this.formData = [];
+        this.hidepanel = false;
+      },
     },
   };
 </script>

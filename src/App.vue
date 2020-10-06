@@ -1,6 +1,6 @@
 <template>
   <div id="main-app">
-    <vc-layout class="m-auto">
+    <vc-layout>
       <vc-toolbar color="pink" fixed dark application>
         <vc-toolbar-icon-left icon="mdi-lastfm" />
         <vc-toolbar-title>Pet&#9829;Care</vc-toolbar-title>
@@ -21,7 +21,6 @@
 
 <script>
   import HelloWorld from "./components/HelloWorld.vue";
-
   import _ from "lodash";
   import axios from "axios";
   export default {
@@ -53,7 +52,7 @@
       editItem(id, field, text) {
         const aptIndex = _.findIndex(this.appointments, { aptId: id });
         const New_appointments = (this.appointments[aptIndex][field] = text);
-        console.log(typeof New_appointments);
+        // console.log(typeof New_appointments);
       },
     },
   };

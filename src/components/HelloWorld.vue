@@ -1,14 +1,14 @@
 <template>
   <section class="hello">
-    <app-appointment />
+    <app-appointment @add="addItem" />
     <vc-layout :spacing="20" class="m-auto">
       <vc-col :span="8" sm12 md12 xs24>
         <vc-card class="elevation-4">
           <vc-card-media height="316px" parallax background="/pet_image.png" />
           <vc-card-title>
-            <h3
+            <h2
               :class="[
-                'subheading',
+                'title',
                 'ma-0',
                 'pa-0',
                 'ellipsis',
@@ -17,7 +17,7 @@
               ]"
             >
               Pet Appointments List
-            </h3>
+            </h2>
           </vc-card-title>
           <vc-card-text>
             <vc-collapsible
@@ -165,6 +165,11 @@
     methods: {
       formattedDate(date) {
         return moment(new Date(date)).format("DD-MM-YY, h:mm a");
+      },
+      addItem(appointment) {
+        appointment.aptId = this.aptIndex;
+        this.aptIndex++;
+        this.appointments.push(appointment);
       },
     },
   };
