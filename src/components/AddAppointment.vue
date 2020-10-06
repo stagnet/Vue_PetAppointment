@@ -75,7 +75,7 @@
 <script>
   export default {
     name: "AddAppointment",
-    props: ["spacing"],
+    // props: ["spacing"],
     data() {
       return {
         formData: [],

@@ -19,6 +19,7 @@
               Pet Appointments List
             </h2>
           </vc-card-title>
+
           <vc-card-text>
             <vc-collapsible
               color="indigo"
@@ -38,14 +39,7 @@
                     :key="appointment.aptIndex"
                   >
                     <!-- add & delete button -->
-                    <vc-button
-                      icon-button
-                      size="small"
-                      color="green"
-                      class="ma-1"
-                    >
-                      <vc-icon>add</vc-icon>
-                    </vc-button>
+
                     <vc-button
                       icon-button
                       size="small"
@@ -138,7 +132,8 @@
 
 <script>
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-  import AppAppointment from "./AddAppointment";
+  import AppAppointment from "./AddAppointment.vue";
+
   import moment from "moment";
   export default {
     name: "HelloWorld",
